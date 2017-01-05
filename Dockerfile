@@ -1,5 +1,6 @@
 FROM ubuntu:14.04
 
+RUN sed -i "s/archive.ubuntu.com/th.archive.ubuntu.com/" /etc/apt/sources.list
 RUN apt-get -y update
 RUN apt-get -y install curl
 
