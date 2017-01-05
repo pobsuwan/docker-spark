@@ -73,3 +73,28 @@ spark-worker-2:
     volumes:
       - ./conf/spark-worker-2:/conf
       - ./data:/tmp/data
+spark-worker-3:
+    image: local/spark-2
+    command: bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+    hostname: spark-worker-3
+    environment:
+      SPARK_CONF_DIR: /conf
+      SPARK_PUBLIC_DNS: 127.0.0.1
+      SPARK_WORKER_CORES: 2
+      SPARK_WORKER_MEMORY: 2g
+      SPARK_WORKER_PORT: 8883
+      SPARK_WORKER_WEBUI_PORT: 8083
+    links:
+      - spark-master
+    expose:
+      - 7032
+      - 7033
+      - 7034
+      - 7035
+      - 7036
+      - 8881
+    ports:
+      - 8083:8083
+    volumes:
+      - ./conf/spark-worker-3:/conf
+      - ./data:/tmp/data
